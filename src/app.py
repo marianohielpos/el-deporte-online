@@ -3,6 +3,10 @@ from mongoengine import connect
 from settings import Config
 from encoder import CustomJSONEncoder
 
+from controllers.product_controller import PRODUCT_BLUEPRINT
+
+from database.database import Database
+
 APP = Flask(__name__)
 
 connect(db=Config.DATABASE_NAME,
@@ -16,6 +20,12 @@ connect(db=Config.DATABASE_NAME,
 
 APP.json_encoder = CustomJSONEncoder
 
+APP.register_blueprint(PRODUCT_BLUEPRINT, url_prefix='/product')
+
+database = Database.instance()
+database.db = {
+    'product': {}
+}
 
 @APP.route('/')
 def index():

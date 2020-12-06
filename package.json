@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install": "webpack"
+    "install": "webpack",
+    "build": "webpack --config webpack.config.js"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +20,11 @@
     "react-dom": "^16.13.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "react-bootstrap": "^1.4.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0"
   }
 }

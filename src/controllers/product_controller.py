@@ -1,66 +1,65 @@
-from database.database import Database
 from flask import Blueprint, jsonify, request
 from model.product import Product
 
+from schemas.product_schema import CreateProductSchema, ProductDetailSchema
+
 PRODUCT_BLUEPRINT = Blueprint('product', __name__)
+
 
 @PRODUCT_BLUEPRINT.route('/', methods=['GET'])
 def list_products():
-    all_products = Database.instance().db.get('product',{})
+    all_products = Product.objects
     product_list = []
-    for product_id in all_products:
-        product = all_products.get(product_id)
-        product_dict = product.serialize()
-        product_dict["id"] = product_id
-        product_list.append(product_dict)
+    for product in all_products:
+        product_list.append(ProductDetailSchema().dump(product))
 
     return jsonify({'products': product_list})
 
+
 @PRODUCT_BLUEPRINT.route('/<_id>', methods=['GET'])
 def get(_id):
-    product = Database.instance().db.get('product').get(_id, {})
-    if not product:
-        return product, 404
+    try:
+        product = Product.objects.get(id=_id)
+        response = ProductDetailSchema().dump(product)
+        return jsonify(response)
+    except:
+        return "Not found", 404
 
-    response = product.serialize()
-    response['id'] = _id
-    return jsonify(response)
 
 @PRODUCT_BLUEPRINT.route('/', methods=['POST'])
 def post():
     content = request.get_json()
-    product = Product(content)
-    product_id = str(len(Database.instance().db.get('product')) + 1)
-    Database.instance().db.get('product')[product_id] = product
-    response = product.serialize()
-    response['id'] = product_id
+    product_schema = CreateProductSchema()
+    product_data = product_schema.load(content)
+
+    product = Product.objects.create(
+        name=product_data.get('name'),
+        short_description=product_data.get('short_description'),
+        long_description=product_data.get('long_description'),
+        show_catalog=product_data.get('show_catalog'),
+        image=product_data.get('image')
+    )
+    response = ProductDetailSchema().dump(product)
     return jsonify(response)
+
 
 @PRODUCT_BLUEPRINT.route('/<_id>', methods=['PUT'])
 def update(_id):
-    product = Database.instance().db.get('product').get(_id, {})
-    if not product:
-        return product, 404
+    try:
+        product = Product.objects.get(id=_id)
+        product_changes = request.get_json()
 
-    product_changes = request.get_json()
-    product_dict = product.serialize()
-    for attribute in product_changes:
-        product_dict[attribute] = product_changes[attribute]
-
-    updated_product = Product(product_dict)
-    Database.instance().db.get('product')[_id] = updated_product
-    response = updated_product.serialize()
-    response['id'] = _id
-    return jsonify(response)
+        product.update(**product_changes)
+        response = ProductDetailSchema().dump(Product.objects.get(id=_id))
+        return jsonify(response)
+    except:
+        return "Not found", 404
 
 
 @PRODUCT_BLUEPRINT.route('/<_id>', methods=['DELETE'])
 def remove(_id):
-    product = Database.instance().db.get('product').get(_id, {})
-    if not product:
-        return product, 404
-
-    Database.instance().db.get('product').pop(_id)
-    return jsonify({})
-
-
+    try:
+        product = Product.objects.get(id=_id)
+        return jsonify(product.delete())
+    except:
+        return "Not found", 404

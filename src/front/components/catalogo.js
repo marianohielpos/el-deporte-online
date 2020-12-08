@@ -5,7 +5,6 @@ const Catalogo = (props) => {
     return (
         <div>
             <div>Catalogo</div>
-            <Link to={'/'}>Home</Link>
         </div>
     );
 }

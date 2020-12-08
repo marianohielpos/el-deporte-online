@@ -26,7 +26,7 @@ const Home = (props) => {
         <Carousel.Item style={{ height: "450px" }}>
           <img
             className="d-block w-100"
-            src="./imagenes/deporte1.jpeg"
+            src="./static/imagenes/deporte1.jpeg"
             alt="Primero"
           />
           <Carousel.Caption>
@@ -36,7 +36,7 @@ const Home = (props) => {
         <Carousel.Item style={{ height: "450px" }}>
           <img
             className="d-block w-100"
-            src="./imagenes/deporte2.jpeg"
+            src="./static/imagenes/deporte2.jpeg"
             alt="Segundo"
           />
 
@@ -47,7 +47,7 @@ const Home = (props) => {
         <Carousel.Item style={{ height: "450px" }}>
           <img
             className="d-block w-100"
-            src="./imagenes/deporte3.jpeg"
+            src="./static/imagenes/deporte3.jpeg"
             alt="Tercero"
           />
 

@@ -20,15 +20,17 @@ connect(db=Config.DATABASE_NAME,
 
 APP.json_encoder = CustomJSONEncoder
 
-APP.register_blueprint(PRODUCT_BLUEPRINT, url_prefix='/product')
+APP.register_blueprint(PRODUCT_BLUEPRINT, url_prefix='/api/product')
 
 database = Database.instance()
 database.db = {
     'product': {}
 }
 
-@APP.route('/')
-def index():
+
+@APP.route('/', defaults={'path': ''})
+@APP.route('/<path:path>')
+def index(path):
     return APP.send_static_file('index.html')
 
 

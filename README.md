@@ -1,3 +1,8 @@
+Puerto del server: 5000
+
+Puerto de desarrollo del front con el webserver de webpack: 8080
+
+
 Instalar:
 
     - npm
@@ -10,6 +15,14 @@ Para correr local:
     - npm run install
     - Correr flask
 
+
+Desarrollo front con hot reloading:
+
+    - npm start
+
+Buildeo para prod:
+
+    - npm run build
 
 
 

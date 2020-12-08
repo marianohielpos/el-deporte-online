@@ -1,6 +1,7 @@
 .pytest_cache
 .idea
 venv
+env
 __pycache__
 node_modules
 src/static/index_bundle.js

@@ -13,9 +13,8 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: path.resolve(__dirname, 'src/static'),
+    contentBase: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'src/static')],
     index: 'index.html',
-    publicPath: '/static/',
     historyApiFallback: true,
     proxy: {
       '/api': 'http://localhost:5000'

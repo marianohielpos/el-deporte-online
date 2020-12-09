@@ -7,9 +7,18 @@ const Catalogo = (props) => {
   useEffect(() => {
     fetch("http://0.0.0.0:5000/product/", {
       method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Content-type": "application/json",
+      },
     })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((resp) => resp.json())
+      .then((r) => {
+        setProductos(r);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   return (

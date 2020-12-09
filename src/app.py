@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from mongoengine import connect
 from settings import Config
 from encoder import CustomJSONEncoder
@@ -6,6 +7,7 @@ from encoder import CustomJSONEncoder
 from controllers.product_controller import PRODUCT_BLUEPRINT
 
 APP = Flask(__name__)
+CORS(APP)
 
 connect(db=Config.DATABASE_NAME,
         authentication_source=Config.DATABASE_AUTH_SOURCE,

@@ -25,8 +25,21 @@ Response
 
 ### Consulta producto listado
 
+A esto le podemos agregar 3 query params: 
+
+- show_catalog (false | true)
+- trending (false | true)
+- query (String)
+
+En caso de que algun parametro esté ausente, no se lo tiene en cuenta. Para productos destacados:
+
 ```
-curl --location --request GET '0.0.0.0:5000/api/product/'
+curl --location --request GET '0.0.0.0:5000/api/product?trending=true'
+``` 
+
+Para el search, se debe insertar la query como string:
+```
+curl --location --request GET '0.0.0.0:5000/api/product?query=Pelota'
 ```
 Response
 ```

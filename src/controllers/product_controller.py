@@ -3,15 +3,23 @@ from model.product import Product
 
 from schemas.product_schema import CreateProductSchema, ProductDetailSchema
 
+from model.search_engine import SearchEngine
+
 PRODUCT_BLUEPRINT = Blueprint('product', __name__)
 
 
 @PRODUCT_BLUEPRINT.route('/', methods=['GET'])
 def list_products():
-    all_products = Product.objects
+    query = request.args.get('query')
+    show_catalog = request.args.get('show_catalog')
+    trending = request.args.get('trending')
+
+    all_products = SearchEngine().search(query, show_catalog, trending)
+
     product_list = []
     for product in all_products:
         product_list.append(ProductDetailSchema().dump(product))
+
 
     return jsonify({'products': product_list})
 
@@ -37,7 +45,8 @@ def post():
         short_description=product_data.get('short_description'),
         long_description=product_data.get('long_description'),
         show_catalog=product_data.get('show_catalog'),
-        image=product_data.get('image')
+        image=product_data.get('image'),
+        trending=product_data.get('trending')
     )
     response = ProductDetailSchema().dump(product)
     return jsonify(response)

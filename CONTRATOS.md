@@ -104,3 +104,47 @@ Response:
 ```
 curl --location --request DELETE '0.0.0.0:5000/api/product/1'
 ```
+
+
+
+### Alta de valoración
+
+```
+curl --location --request POST 'localhost:5000/api/product/5fd2a75511b53ee2d7e576e5/evaluation' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "comment": "genial",
+    "rating": 5
+}'
+```
+
+Respuesta
+
+```
+{
+    "comment": "genial",
+    "rating": 5
+}
+```
+
+
+### Obtención de valoraciones
+
+```
+curl --location --request GET 'localhost:5000/api/product/5fd2a75511b53ee2d7e576e5/evaluation' \
+```
+
+Respuesta:
+
+```
+[
+    {
+        "comment": "genial",
+        "rating": 5
+    },
+    {
+        "comment": "genial",
+        "rating": 5
+    }
+]
+```

@@ -5,7 +5,7 @@ const Catalogo = (props) => {
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
-    fetch("http://0.0.0.0:5000/api/product/", {
+    fetch("http://localhost:5000/api/product/", {
       method: "GET",
       headers: {
         Accept: "application/json",

@@ -5,7 +5,7 @@ const Home = (props) => {
   return (
     <div style={{ background: "#2e2d3d" }}>
       <Card>
-        <Card.Header>El deporte online</Card.Header>
+        <Card.Header>El deporte online!!</Card.Header>
         <Card.Body>
           <blockquote className="blockquote mb-0">
             <p>Encontraras los mejores precios, las mejores promos!</p>

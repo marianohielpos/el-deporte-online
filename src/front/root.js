@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomePage from "./components/home";
 import Catalogo from "./components/catalogo";
 import Header from "./components/header";
+import Informacion from "./components/informacion";
 
 
 const Root = (props) => {
@@ -16,6 +17,9 @@ const Root = (props) => {
           </Route>
           <Route path="/catalogo">
               <Catalogo />
+          </Route>
+          <Route path="/informacion">
+              <Informacion />
           </Route>
       </Switch>
     </Router>

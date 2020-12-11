@@ -20,3 +20,7 @@
 .mine {
     background-color: darkred;
 }
+
+.card-img-top {
+    width: 100%;
+}

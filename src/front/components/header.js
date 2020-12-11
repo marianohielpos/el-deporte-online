@@ -13,6 +13,7 @@ const Header = (props) => {
       <Navbar.Brand href="/">El deporte online</Navbar.Brand>
       <Nav className="mr-auto">
       <Nav.Link href="/catalogo">Catalogo</Nav.Link>
+      <Nav.Link href="/informacion">Informacion</Nav.Link>
      
     </Nav>
     </Navbar>

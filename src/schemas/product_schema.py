@@ -23,3 +23,13 @@ class ProductDetailSchema(Schema):
 
     class Meta:
         fields = ('id', 'name', 'short_description', 'long_description', 'show_catalog', 'image', 'trending')
+
+
+class CreateEvaluationSchema(Schema):
+    comment = fields.Str(required=True)
+    rating = fields.Int(required=True)
+
+
+class EvaluationSchema(Schema):
+    comment = fields.Str(required=True)
+    rating = fields.Int(required=True)

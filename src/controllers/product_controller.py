@@ -1,7 +1,9 @@
-from flask import Blueprint, jsonify, request
-from model.product import Product
+from http import HTTPStatus
 
-from schemas.product_schema import CreateProductSchema, ProductDetailSchema
+from flask import Blueprint, jsonify, request
+from model.product import Product, Evaluation
+
+from schemas.product_schema import CreateProductSchema, ProductDetailSchema, CreateEvaluationSchema, EvaluationSchema
 
 from model.search_engine import SearchEngine
 
@@ -70,5 +72,28 @@ def remove(_id):
     try:
         product = Product.objects.get(id=_id)
         return jsonify(product.delete())
+    except:
+        return "Not found", 404
+
+
+@PRODUCT_BLUEPRINT.route('/<_id>/evaluation', methods=['POST'])
+def create_evaluation(_id):
+    try:
+        product = Product.objects.get(id=_id)
+        evaluation_data = CreateEvaluationSchema().load(request.get_json())
+        evaluation = Evaluation.objects.create(
+            product=product,
+            **evaluation_data
+        )
+        return jsonify(EvaluationSchema().dump(evaluation)), HTTPStatus.CREATED
+    except:
+        return "Not found", 404
+
+
+@PRODUCT_BLUEPRINT.route('/<_id>/evaluation', methods=['GET'])
+def obtain_evaluations(_id):
+    try:
+        evaluations = Evaluation.objects(product=Product.objects.get(id=_id))
+        return jsonify(EvaluationSchema().dump(evaluations, many=True)), HTTPStatus.OK
     except:
         return "Not found", 404

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {Card, ListGroup, ListGroupItem} from "react-bootstrap";
+import {Card, Button, ListGroup, ListGroupItem} from "react-bootstrap";
+import { useHistory } from "react-router";
 
 const Catalogo = (props) => {
+  let history = useHistory()
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
@@ -38,6 +40,9 @@ const Catalogo = (props) => {
           <Card.Body>
             <Card.Link href="#">Algun link</Card.Link>
           </Card.Body>
+          <Card.Body><Button variant="primary" onPress={()=> {
+              history.push('/producto')
+            }}>Ver Producto</Button></Card.Body>
         </Card>
       ))}
     </div>

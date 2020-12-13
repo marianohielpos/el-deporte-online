@@ -4,6 +4,7 @@ import HomePage from "./components/home";
 import Catalogo from "./components/catalogo";
 import Header from "./components/header";
 import Informacion from "./components/informacion";
+import Producto from "./components/producto";
 
 
 const Root = (props) => {
@@ -20,6 +21,9 @@ const Root = (props) => {
           </Route>
           <Route path="/informacion">
               <Informacion />
+          </Route>
+          <Route path="/producto">
+              <Producto/>
           </Route>
       </Switch>
     </Router>

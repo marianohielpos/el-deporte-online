@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {Card, Button} from "react-bootstrap";
+import {Card,    Button} from "react-bootstrap";
 
 const Producto = (props) => {
   const [product, setProduct] = useState([]);
 
+  console.log("Properties:", props)
   useEffect(() => {
-    fetch("http://localhost:5000/api/product/5fd52401b5258c4640c2f8ee", {
+    fetch("http://localhost:5000/api/product/"+ props.location.props.producto, {
       method: "GET",
       headers: {
         Accept: "application/json",

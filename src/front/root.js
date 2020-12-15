@@ -22,9 +22,7 @@ const Root = (props) => {
           <Route path="/informacion">
               <Informacion />
           </Route>
-          <Route path="/producto">
-              <Producto/>
-          </Route>
+          <Route path="/producto/:slug" component={Producto}/>
       </Switch>
     </Router>
     </div>

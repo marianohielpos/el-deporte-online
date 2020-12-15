@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {Card, Button, ListGroup, ListGroupItem} from "react-bootstrap";
 import { useHistory } from "react-router";
+import {Link} from "react-router-dom";
 
 const Catalogo = (props) => {
   let history = useHistory()
@@ -29,10 +30,9 @@ const Catalogo = (props) => {
 
       {productos.map((producto,i) => (
         <Card style={{ width: "18rem", margin: "10px"}} key={i}>
-          <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
+          <Card.Img variant="top" src={producto.image} />
           <Card.Body>
             <Card.Title>{producto.name}</Card.Title>
-            <Card.Text>{producto.long_description}</Card.Text>
           </Card.Body>
           <ListGroup className="list-group-flush">
             <ListGroupItem>{producto.short_description}</ListGroupItem>
@@ -40,9 +40,11 @@ const Catalogo = (props) => {
           <Card.Body>
             <Card.Link href="#">Algun link</Card.Link>
           </Card.Body>
-          <Card.Body><Button variant="primary" onPress={()=> {
-              history.push('/producto')
-            }}>Ver Producto</Button></Card.Body>
+          <Card.Body>
+              <Link className="btn btn-primary" to={{pathname:"/producto/" + producto.id, props: {producto:producto.id}}}>
+                 Ver Producto
+                </Link>
+          </Card.Body>
         </Card>
       ))}
     </div>

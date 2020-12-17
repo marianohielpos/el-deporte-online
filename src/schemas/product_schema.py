@@ -8,9 +8,10 @@ class CreateProductSchema(Schema):
     show_catalog = fields.Boolean(default=True)
     image = fields.Str(default='mock_image/pelota.jpeg')
     trending = fields.Boolean(default=False)
+    price = fields.Float(default=100.0)
 
     class Meta:
-        fields = ('name', 'short_description', 'long_description', 'show_catalog', 'image', 'trending')
+        fields = ('name', 'short_description', 'long_description', 'show_catalog', 'image', 'trending', 'price')
 
 
 class ProductDetailSchema(Schema):
@@ -20,9 +21,10 @@ class ProductDetailSchema(Schema):
     show_catalog = fields.Boolean(default=True, required=True)
     image = fields.Str(default='mock_image/pelota.jpeg', required=True)
     trending = fields.Boolean(default=False, required=True)
+    price = fields.Float(required=True)
 
     class Meta:
-        fields = ('id', 'name', 'short_description', 'long_description', 'show_catalog', 'image', 'trending')
+        fields = ('id', 'name', 'short_description', 'long_description', 'show_catalog', 'image', 'trending', 'price')
 
 
 class CreateEvaluationSchema(Schema):

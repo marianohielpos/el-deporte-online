@@ -6,8 +6,11 @@ curl --location --request POST '0.0.0.0:5000/api/product/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "name" : "Pelota",
-    "short_description": "Pelota de futbol 5",
-    "long_description": "Una pelota de futbol muy buena marca Adidas."
+    "short_description": "Pelota de rugby",
+    "long_description": "Una pelota de rugby muy buena marca Adidas.",
+    "show_catalog": false,
+    "trending": true,
+    "price": 100.0
 }'
 ```
 Response
@@ -19,7 +22,8 @@ Response
   "name": "Pelota",
   "short_description": "Pelota de rugby",
   "show_catalog": true,
-  "trending": false
+  "trending": false,
+  "price": 100.0
 }
 ```
 
@@ -52,7 +56,8 @@ Response
           "name": "Pelota",
           "short_description": "Pelota de rugby",
           "show_catalog": true,
-          "trending": false
+          "trending": false,
+          "price": 100.0
         }
   ]
 }
@@ -73,7 +78,8 @@ Response
   "name": "Pelota",
   "short_description": "Pelota de rugby",
   "show_catalog": true,
-  "trending": false
+  "trending": false,
+  "price": 100.0
 }
 ```
 
@@ -95,7 +101,8 @@ Response:
   "name": "Pelotita",
   "short_description": "Pelota de rugby",
   "show_catalog": true,
-  "trending": false
+  "trending": false,
+  "price": 100.0
 }
 ```
 

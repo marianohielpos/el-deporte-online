@@ -1,4 +1,4 @@
-from mongoengine import Document, StringField, BooleanField, IntField, ReferenceField
+from mongoengine import Document, StringField, BooleanField, IntField, ReferenceField, FloatField
 
 
 class Product(Document):
@@ -8,6 +8,7 @@ class Product(Document):
     show_catalog = BooleanField(default=True)
     image = StringField(default='mock_image/pelota.jpeg')
     trending = BooleanField(default=False)
+    price = FloatField(default=100.0)
 
 
 class Evaluation(Document):

@@ -6,7 +6,7 @@ class Product(Document):
     short_description = StringField()
     long_description = StringField()
     show_catalog = BooleanField(default=True)
-    image = StringField(default='mock_image/pelota.jpeg')
+    image = StringField(default='/static/imagenes/pelota.jpeg')
     trending = BooleanField(default=False)
     price = FloatField(default=100.0)
 

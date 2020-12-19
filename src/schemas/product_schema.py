@@ -6,7 +6,7 @@ class CreateProductSchema(Schema):
     short_description = fields.Str(default='Short Description', required=True)
     long_description = fields.Str(default='Long Description', required=True)
     show_catalog = fields.Boolean(default=True)
-    image = fields.Str(default='mock_image/pelota.jpeg')
+    image = fields.Str(default='/static/imagenes/pelota.jpeg')
     trending = fields.Boolean(default=False)
     price = fields.Float(default=100.0)
 
@@ -19,7 +19,7 @@ class ProductDetailSchema(Schema):
     short_description = fields.Str(default='Short Description', required=True)
     long_description = fields.Str(default='Long Description', required=True)
     show_catalog = fields.Boolean(default=True, required=True)
-    image = fields.Str(default='mock_image/pelota.jpeg', required=True)
+    image = fields.Str(default='/static/imagenes/pelota.jpeg', required=True)
     trending = fields.Boolean(default=False, required=True)
     price = fields.Float(required=True)
 

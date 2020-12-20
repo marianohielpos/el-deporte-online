@@ -1,7 +1,35 @@
-import React, { Component } from "react";
-import { Card, Carousel, Container, Row, Col } from "react-bootstrap";
+import React, {Component, useEffect, useState} from "react";
+import {
+  Card,
+  Carousel,
+  Container,
+  Row,
+  Col,
+  ListGroup,
+  ListGroupItem
+} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 const Home = (props) => {
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/product/?trending=true", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+      },
+    })
+      .then((resp) => resp.json())
+      .then((r) => {
+        setProductos(r.products);
+      })
+      .catch((error) => {
+        console.log("y ahi va el error", error);
+      });
+  }, []);
+
   return (
     <div style={{ background: "#2e2d3d" }}>
       <Card>
@@ -23,38 +51,18 @@ const Home = (props) => {
         <Row>
           <Col >
           <Carousel>
-        <Carousel.Item style={{ height: "450px" }}>
-          <img
-            className="d-block w-100"
-            src="./static/imagenes/deporte1.jpeg"
-            alt="Primero"
-          />
-          <Carousel.Caption>
-            <h3 style={{ color: "black" }}>Las mejores marcas</h3>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item style={{ height: "450px" }}>
-          <img
-            className="d-block w-100"
-            src="./static/imagenes/deporte2.jpeg"
-            alt="Segundo"
-          />
-
-          <Carousel.Caption>
-            <h3 style={{ color: "black" }}>Las mejores ofertas</h3>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item style={{ height: "450px" }}>
-          <img
-            className="d-block w-100"
-            src="./static/imagenes/deporte3.jpeg"
-            alt="Tercero"
-          />
-
-          <Carousel.Caption>
-            <h3 style={{ color: "black" }}> Las mejores promos!</h3>
-          </Carousel.Caption>
-        </Carousel.Item>
+          {productos.map((producto,i) => (
+              <Carousel.Item style={{ height: "450px" }}>
+               <img
+                   src={producto.image}
+                   alt={producto.name}
+                   class="img-trending"
+               />
+               <Carousel.Caption>
+                 <h3 style={{ color: "black" }}>{producto.name}</h3>
+               </Carousel.Caption>
+              </Carousel.Item>
+          ))}
       </Carousel>
             
             </Col>

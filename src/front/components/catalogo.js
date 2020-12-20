@@ -2,13 +2,36 @@ import React, { useState, useEffect } from "react";
 import { Card, Button, ListGroup, ListGroupItem, Row } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 const Catalogo = (props) => {
   let history = useHistory();
+  const [input, setInput] = useState('');
   const [productos, setProductos] = useState([]);
 
+  const updateInput = (event) => {
+    console.log(event.target.value);
+    setInput(event.target.value);
+    
+    fetch("http://localhost:5000/api/product?query=" + event.target.value, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+      },
+    })
+      .then((resp) => resp.json())
+      .then((r) => {
+        setProductos(r.products);
+      })
+      .catch((error) => {
+        console.log("y ahi va el error", error);
+      });
+  };
+
   useEffect(() => {
-    fetch("http://localhost:5000/api/product/", {
+    console.log('test');
+    fetch("http://localhost:5000/api/product?query=" + input, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -41,12 +64,21 @@ const Catalogo = (props) => {
     setProductos(productosCopia);
   };
 
+
+
   return (
     <div>
       <h1>Catalogo</h1>
-      <Button variant="primary" onClick={() => ordenarPorNombre()}>
-        Ordenar alfabeticamente
-      </Button>
+      <div className = {"m-3"}>
+         <SearchBar
+          input={input}
+          onChange={updateInput}
+          />
+
+        <Button variant="primary" onClick={() => ordenarPorNombre()} className = {"ml-3"}>
+          Ordenar alfabeticamente
+        </Button>
+      </div>
 
       <Row>
         {productos.map((producto, i) => (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Card,    Button, ListGroup, Form} from "react-bootstrap";
+import {Card,    Button, ListGroup, Form, Badge} from "react-bootstrap";
 
 const Producto = (props) => {
   const [product, setProduct] = useState([]);
@@ -123,6 +123,11 @@ const Producto = (props) => {
     <div style={{ background: "#2e2d3d", width: "30rem" }}>
         <Card>
             <Card.Header>{product.name}</Card.Header>
+            <span className="product-price-badge">
+                  <h2>
+                    <Badge variant="secondary">$ {product.price}</Badge>
+                  </h2>
+                </span>
             <Card.Img variant="top" src={product.image} />
             <Card.Body>
                 <p>{product.short_description}</p>

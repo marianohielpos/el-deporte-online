@@ -85,7 +85,7 @@ const Catalogo = (props) => {
           <Card style={{ width: "18rem", margin: "10px" }} key={i}>
             <Card.Img
               variant="top"
-              src="./static/imagenes/imagen-camara.jpg"
+              src={producto.image || "./static/imagenes/imagen-camara.jpg"}
             />
             <Card.Body>
               <Card.Title>{producto.name}</Card.Title>

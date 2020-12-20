@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Card,    Button, ListGroup} from "react-bootstrap";
+import {Card,    Button, ListGroup, Form} from "react-bootstrap";
 
 const Producto = (props) => {
   const [product, setProduct] = useState([]);
@@ -23,7 +23,9 @@ const Producto = (props) => {
       });
   }, []);
 
-  useEffect(() => {
+  useEffect(getEvaluations, []);
+
+  function getEvaluations() {
     fetch("http://localhost:5000/api/product/"+ props.location.props.producto+"/evaluation", {
       method: "GET",
       headers: {
@@ -38,13 +40,14 @@ const Producto = (props) => {
       .catch((error) => {
         console.log("y ahi va el error", error);
       });
-  }, []);
+  }
 
-  function render_evaluations() {
+
+  function renderEvaluations() {
       if (evaluations.length > 0) {
           console.log(evaluations)
           return (
-                <div>
+                <div className={"border p-2"}>
                     <div>Comentarios y valoraciones</div>
                     <ListGroup>
                         {
@@ -67,6 +70,54 @@ const Producto = (props) => {
       return <div>No hay comentarios</div>
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+
+    fetch("http://localhost:5000/api/product/"+ props.location.props.producto+"/evaluation", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        "rating": event.target.elements[0].value,
+        "comment": event.target.elements[1].value
+      })
+    })
+      .then(() => {
+          return getEvaluations()
+      })
+      .catch((error) => {
+        console.log("y ahi va el error", error);
+      });
+  };
+
+  function renderEvaluationForm() {
+      return (
+          <Form className={"border mt-3 mb-3 p-2"} onSubmit={handleSubmit}>
+              Evaluá el producto
+              <Form.Group name="rating" type="number">
+                <Form.Label>Rating</Form.Label>
+                <Form.Control as="select">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </Form.Control>
+              </Form.Group>
+              <Form.Group name="comment" type="text">
+                <Form.Label>Dejanos un comentario</Form.Label>
+                <Form.Control as="textarea" rows={2} />
+              </Form.Group>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
+      )
+  }
+
 
   return (
     <div style={{ background: "#2e2d3d", width: "30rem" }}>
@@ -76,7 +127,8 @@ const Producto = (props) => {
             <Card.Body>
                 <p>{product.short_description}</p>
                 <p>{product.long_description}</p>
-                {render_evaluations()}
+                {renderEvaluations()}
+                {renderEvaluationForm()}
             <Button variant="primary">Agregar al carrito</Button>
             </Card.Body>
         </Card>

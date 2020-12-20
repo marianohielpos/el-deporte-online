@@ -19,5 +19,8 @@ module.exports = {
     proxy: {
       '/api': 'http://localhost:5000'
     }
+  },
+  optimization: {
+    minimize: false
   }
 }

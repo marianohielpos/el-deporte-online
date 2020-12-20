@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Card, Button, ListGroup, ListGroupItem, Row } from "react-bootstrap";
+import {
+  Card,
+  Button,
+  ListGroup,
+  ListGroupItem,
+  Row,
+  Badge
+} from "react-bootstrap";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
@@ -83,6 +90,11 @@ const Catalogo = (props) => {
       <Row>
         {productos.map((producto, i) => (
           <Card style={{ width: "18rem", margin: "10px" }} key={i}>
+            <span className="product-price-badge">
+                  <h2>
+                    <Badge variant="secondary">$ {producto.price}</Badge>
+                  </h2>
+                </span>
             <Card.Img
               variant="top"
               src={producto.image || "./static/imagenes/imagen-camara.jpg"}

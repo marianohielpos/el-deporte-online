@@ -13,7 +13,7 @@ const Catalogo = (props) => {
     console.log(event.target.value);
     setInput(event.target.value);
     
-    fetch("http://localhost:5000/api/product?query=" + event.target.value, {
+    fetch("http://localhost:5000/api/product/?query=" + event.target.value, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -31,7 +31,7 @@ const Catalogo = (props) => {
 
   useEffect(() => {
     console.log('test');
-    fetch("http://localhost:5000/api/product?query=" + input, {
+    fetch("http://localhost:5000/api/product/?query=" + input, {
       method: "GET",
       headers: {
         Accept: "application/json",

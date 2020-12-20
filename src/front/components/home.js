@@ -1,5 +1,6 @@
 import React, {Component, useEffect, useState} from "react";
 import {
+  Badge,
   Card,
   Carousel,
   Container,
@@ -53,14 +54,19 @@ const Home = (props) => {
           <Carousel>
           {productos.map((producto,i) => (
               <Carousel.Item style={{ height: "450px" }}>
-               <img
-                   src={producto.image}
-                   alt={producto.name}
-                   class="img-trending"
-               />
-               <Carousel.Caption>
-                 <h3 style={{ color: "black" }}>{producto.name}</h3>
-               </Carousel.Caption>
+                <span className="notify-badge">
+                  <h1>
+                    <Badge variant="secondary">$ {producto.price}</Badge>
+                  </h1>
+                </span>
+                <img
+                    src={producto.image}
+                    alt={producto.name}
+                    class="img-trending"
+                />
+                <Carousel.Caption>
+                  <h3 style={{ color: "black" }}>{producto.name}</h3>
+                </Carousel.Caption>
               </Carousel.Item>
           ))}
       </Carousel>
